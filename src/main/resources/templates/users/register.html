@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa"  xmlns:th="http://www.thymeleaf.org">
+
+
+
+<head>
+    <meta charset="UTF-8">
+
+</head>
+
+<body>
+
+<section>
+    <h2>ثبت نام کاربر</h2>
+
+    <form th:action="@{/users/register}" method="post">
+        <div>
+            <label>نام:</label>
+            <input type="text" name="firstName"/>
+        </div>
+        <div>
+            <label>نام خانوادگی:</label>
+            <input type="text" name="lastName"/>
+        </div>
+        <div>
+            <label>ایمیل:</label>
+            <input type="email" name="email"/>
+        </div>
+        <div>
+            <label>رمز عبور:</label>
+            <input type="password" name="password"/>
+        </div>
+        <div>
+            <label>نقش:</label>
+            <select name="role">
+                <option value="STUDENT">دانشجو</option>
+                <option value="TEACHER">استاد</option>
+            </select>
+        </div>
+
+        <button type="submit">ثبت نام</button>
+    </form>
+</section>
+<a th:href="@{/index.html}">بازگشت</a>
+
+</body>
+</html>

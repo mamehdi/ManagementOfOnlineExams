@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>داشبورد مدیر</title>
+</head>
+<body>
+
+<h2 th:text="${course.title}"></h2>
+
+<form th:action="@{/admin/courses/{id}/assign-teacher(id=${course.id})}" method="post">
+    <select name="teacherId">
+        <option th:each="t : ${teachers}"
+                th:value="${t.id}"
+                th:text="${t.firstName + ' ' + t.lastName}"
+                th:if="${t.status.name() == 'APPROVED'}">
+
+        </option>
+    </select>
+    <button type="submit">ثبت استاد</button>
+</form>
+
+<hr/>
+
+<form th:action="@{/admin/courses/{id}/add-student(id=${course.id})}" method="post">
+    <select name="studentId">
+        <option th:each="s : ${students}"
+                th:value="${s.id}"
+                th:text="${s.firstName + ' ' + s.lastName}"
+                th:if="${s.status.name() == 'APPROVED'}">
+
+        </option>
+    </select>
+    <button type="submit">افزودن دانشجو</button>
+</form>
+
+<hr/>
+
+<h3>دانشجویان دوره</h3>
+<ul>
+    <li th:each="s : ${course.students}"
+        th:text="${s.firstName + ' ' + s.lastName}">
+    </li>
+</ul>
+<a th:href="@{/admin/dashboard}">بازگشت</a>
+
+</body>
+</html>

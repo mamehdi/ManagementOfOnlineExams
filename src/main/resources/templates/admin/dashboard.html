@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>داشبورد مدیر</title>
+</head>
+<body>
+
+<h1>داشبورد مدیر</h1>
+
+<ul>
+    <li><a th:href="@{/users/list}">مدیریت کاربران</a></li>
+    <li><a th:href="@{/courses/list}">مدیریت دوره‌ها</a></li>
+    <li><a th:href="@{/users/search}">جستجوی پیشرفته</a></li>
+    <li><a th:href="@{/admin/courses}">            افزودن استاد و دانشجو به دوره‌ها
+    </a></li>
+
+</ul>
+
+<form th:action="@{/logout}" method="post">
+    <button type="submit">خروج</button>
+</form>
+
+</body>
+</html>

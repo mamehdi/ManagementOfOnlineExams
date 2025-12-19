@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html  dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+    <meta charset="UTF-8">
+
+</head>
+
+<body>
+
+<section>
+    <h2>ساخت دوره جدید</h2>
+
+    <form th:action="@{/courses}" method="post">
+        <div>
+            <label>عنوان دوره:</label>
+            <input type="text" name="title"/>
+        </div>
+        <div>
+            <label>تاریخ شروع:</label>
+            <input type="date" name="startDate" id="startDate"/>
+        </div>
+        <div>
+            <label>تاریخ پایان:</label>
+            <input type="date" name="endDate" id="endDate"/>
+        </div>
+
+        <button type="submit">ذخیره</button>
+    </form>
+</section>
+<script>
+    const startDate = document.getElementById("startDate");
+    const endDate = document.getElementById("endDate");
+
+    startDate.addEventListener("change", function () {
+        if (startDate.value) {
+            endDate.min = startDate.value;
+            if (endDate.value < startDate.value) {
+                endDate.value = startDate.value;
+            }
+        }
+    });
+</script>
+<a th:href="@{/admin/dashboard}">بازگشت</a>
+
+</body>
+</html>

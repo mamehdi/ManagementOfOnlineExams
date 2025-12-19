@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html  dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+
+<section>
+    <h2>لیست کاربران</h2>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>نام</th>
+            <th>ایمیل</th>
+            <th>نقش</th>
+            <th>وضعیت</th>
+            <th>عملیات</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.firstName + ' ' + user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.role}"></td>
+            <td th:text="${user.status}"></td>
+            <td>
+                <form th:action="@{'/users/' + ${user.id} + '/approve'}" method="post">
+                    <button type="submit" th:if="${user.status != null and user.status.name() == 'PENDING'}">تایید</button>
+                    <span th:if="${user.status != null and user.status.name() == 'APPROVED'}">—</span>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+<a th:href="@{/admin/dashboard}">بازگشت</a>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>داشبورد کاربر</title>
+</head>
+<body>
+
+<h1>داشبورد کاربر</h1>
+
+<p>
+    خوش آمدید
+    <span th:text="${#authentication.name}"></span>
+</p>
+
+<ul>
+    <li th:if="${#authorization.expression('hasRole(''TEACHER'')')}">
+        <a href="#">مدیریت آزمون‌ها</a>
+    </li>
+
+    <li th:if="${#authorization.expression('hasRole(''STUDENT'')')}">
+        <a href="#">آزمون‌های من</a>
+    </li>
+</ul>
+
+<a th:href="@{/logout}">خروج</a>
+
+</body>
+</html>

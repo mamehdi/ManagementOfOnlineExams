@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html  dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>جستجوی کاربران</title>
+</head>
+<body>
+
+<section>
+    <h2>جستجوی پیشرفته کاربران</h2>
+
+    <form th:action="@{/users/search}" method="get">
+        <div>
+            <label>نام:</label>
+            <input type="text" name="firstName" th:value="${firstName}" placeholder="نام کاربر"/>
+        </div>
+
+        <div>
+            <label>نام خانوادگی:</label>
+            <input type="text" name="lastName" th:value="${lastName}" placeholder="نام خانوادگی"/>
+        </div>
+
+        <div>
+            <label>ایمیل:</label>
+            <input type="text" name="email" th:value="${email}" placeholder="ایمیل"/>
+        </div>
+
+        <div>
+            <label>نقش:</label>
+            <select name="role">
+                <option value="">همه نقش‌ها</option>
+                <option value="STUDENT" th:selected="${role == 'STUDENT'}">دانشجو</option>
+                <option value="TEACHER" th:selected="${role == 'TEACHER'}">استاد</option>
+                <option value="ADMIN" th:selected="${role == 'ADMIN'}">مدیر</option>
+            </select>
+        </div>
+
+        <button type="submit">جستجو</button>
+    </form>
+</section>
+
+<div>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>نام</th><th>ایمیل</th><th>نقش</th><th>وضعیت</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${usersPage.content}">
+            <td th:text="${user.firstName + ' ' + user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.role}"></td>
+            <td th:text="${user.status}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <span th:text="'صفحه: ' + ${usersPage.number + 1} + ' / ' + ${usersPage.totalPages}"></span>
+
+        <div>
+            <a th:if="${usersPage.hasPrevious()}"
+               th:href="@{/users/search(firstName=${firstName}, lastName=${lastName}, email=${email}, role=${role}, page=${usersPage.number - 1}, size=${usersPage.size})}">
+                قبلی
+            </a>
+
+            <a th:if="${usersPage.hasNext()}"
+               th:href="@{/users/search(firstName=${firstName}, lastName=${lastName}, email=${email}, role=${role}, page=${usersPage.number + 1}, size=${usersPage.size})}">
+                بعدی
+            </a>
+        </div>
+    </div>
+</div>
+<a th:href="@{/admin/dashboard}">بازگشت</a>
+
+</body>
+</html>
