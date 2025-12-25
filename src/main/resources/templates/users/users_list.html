@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html  dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -39,4 +39,138 @@
 <a th:href="@{/admin/dashboard}">بازگشت</a>
 
 </body>
+</html>-->
+<!DOCTYPE html>
+<html dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>لیست کاربران</title>
+
+    <style>
+        body {
+            font-family: "Vazirmatn", Tahoma, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        thead {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        button {
+            padding: 6px 12px;
+            background-color: #2ecc71;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .pending {
+            color: #e67e22;
+            font-weight: bold;
+        }
+
+        .approved {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h2>لیست کاربران</h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>نام</th>
+            <th>ایمیل</th>
+            <th>نقش</th>
+            <th>وضعیت</th>
+            <th>عملیات</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.firstName + ' ' + user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.role}"></td>
+            <td>
+                <span th:text="${user.status}"
+                      th:classappend="${user.status.name() == 'PENDING'} ? 'pending' : 'approved'"></span>
+            </td>
+            <td>
+                <form th:action="@{'/users/' + ${user.id} + '/approve'}" method="post" th:if="${user.status.name() == 'PENDING'}">
+                    <button type="submit">تایید</button>
+                </form>
+                <span th:if="${user.status.name() == 'APPROVED'}">—</span>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(users)}">
+            <td colspan="5" style="text-align:center; padding:15px; color:#777;">
+                هنوز کاربری ثبت نشده است.
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a class="back-link" th:href="@{/admin/dashboard}">← بازگشت به داشبورد</a>
+
+</div>
+
+</body>
 </html>
+

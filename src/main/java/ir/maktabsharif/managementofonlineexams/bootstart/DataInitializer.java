@@ -1,8 +1,10 @@
 package ir.maktabsharif.managementofonlineexams.bootstart;
 
 import ir.maktabsharif.managementofonlineexams.enums.Role;
+import ir.maktabsharif.managementofonlineexams.enums.UserStatus;
 import ir.maktabsharif.managementofonlineexams.model.User;
 import ir.maktabsharif.managementofonlineexams.repository.UserRepository;
+import jdk.jshell.Snippet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +26,7 @@ public class DataInitializer {
                 manager.setEmail("admin@admin.com");
                 manager.setPassword(passwordEncoder.encode("12345"));
                 manager.setRole(Role.valueOf("ADMIN"));
+                manager.setStatus(UserStatus.valueOf("APPROVED"));
                 userRepository.save(manager);
             }
         };

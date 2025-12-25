@@ -1,0 +1,150 @@
+<!--<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>ویرایش آزمون</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>ویرایش آزمون</h1>
+
+<form th:action="@{|/teacher/courses/${courseId}/exams/${exam.id}/update|}" th:object="${exam}" method="post">
+    <label>عنوان آزمون:</label>
+    <input type="text" th:field="*{title}" required/>
+    <br/>
+    <label>توضیحات:</label>
+    <textarea th:field="*{description}" required></textarea>
+    <br/>
+    <label>مدت زمان (دقیقه):</label>
+    <input type="number" th:field="*{duration}" min="1" required/>
+    <br/>
+    <button type="submit">به‌روزرسانی آزمون</button>
+</form>
+
+<a th:href="@{|/teacher/courses/${courseId}/exams|}">بازگشت به لیست آزمون‌ها</a>
+</body>
+</html>-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>ویرایش آزمون</title>
+
+    <style>
+        body {
+            font-family: "Vazirmatn", Tahoma, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 25px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        input, textarea {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .actions {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        button {
+            padding: 12px 30px;
+            background-color: #2ecc71;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>ویرایش آزمون</h1>
+
+    <form th:action="@{|/teacher/courses/${courseId}/exams/${exam.id}/update|}"
+          th:object="${exam}" method="post">
+
+        <label for="title">عنوان آزمون:</label>
+        <input type="text" th:field="*{title}" id="title" placeholder="عنوان آزمون" required/>
+
+        <label for="description">توضیحات:</label>
+        <textarea th:field="*{description}" id="description" placeholder="توضیحات آزمون" required></textarea>
+
+        <label for="duration">مدت زمان (دقیقه):</label>
+        <input type="number" th:field="*{duration}" id="duration" min="1" placeholder="مثال: 60" required/>
+
+        <div class="actions">
+            <button type="submit">به‌روزرسانی آزمون</button>
+        </div>
+
+    </form>
+
+    <a class="back-link" th:href="@{|/teacher/courses/${courseId}/exams|}">
+        ← بازگشت به لیست آزمون‌ها
+    </a>
+
+</div>
+
+</body>
+</html>
+

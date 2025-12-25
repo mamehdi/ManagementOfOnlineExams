@@ -1,29 +1,159 @@
+<!--<!DOCTYPE html>
+<html dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>داشبورد کاربر</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>داشبورد کاربر</h1>
+    <p>خوش آمدید، <strong th:text="${#authentication.name}"></strong></p>
+    <hr/>
+</header>
+
+<section>
+    <h2>دسترسی‌ها</h2>
+    <ul>
+
+        <li th:if="${#authorization.expression('hasRole(''TEACHER'')')}">
+            <a th:href="@{/teacher/courses}">مدیریت دوره‌ها و آزمون‌ها</a>
+        </li>
+
+
+        <li th:if="${#authorization.expression('hasRole(''STUDENT'')')}">
+            <a th:href="@{/student/courses}">دوره‌ها و آزمون‌های من</a>
+        </li>
+    </ul>
+</section>
+
+<footer>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">خروج از سیستم</button>
+    </form>
+</footer>
+
+</body>
+</html>-->
 <!DOCTYPE html>
 <html dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>داشبورد کاربر</title>
+
+    <style>
+        body {
+            font-family: "Vazirmatn", Tahoma, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        header p {
+            text-align: center;
+            font-size: 16px;
+            color: #34495e;
+        }
+
+        hr {
+            margin: 20px 0;
+            border: 0.5px solid #ccc;
+        }
+
+        section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        a:hover {
+            background-color: #2980b9;
+        }
+
+        footer {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 25px;
+            background-color: #e74c3c;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+    </style>
 </head>
 <body>
 
-<h1>داشبورد کاربر</h1>
+<div class="container">
 
-<p>
-    خوش آمدید
-    <span th:text="${#authentication.name}"></span>
-</p>
+    <header>
+        <h1>داشبورد کاربر</h1>
+        <p>خوش آمدید، <strong th:text="${#authentication.name}"></strong></p>
+        <strong th:text="${userFullName}"></strong>
 
-<ul>
-    <li th:if="${#authorization.expression('hasRole(''TEACHER'')')}">
-        <a href="#">مدیریت آزمون‌ها</a>
-    </li>
+        <hr/>
+    </header>
 
-    <li th:if="${#authorization.expression('hasRole(''STUDENT'')')}">
-        <a href="#">آزمون‌های من</a>
-    </li>
-</ul>
+    <section>
+        <h2>دسترسی‌ها</h2>
+        <ul>
+            <li th:if="${#authorization.expression('hasRole(''TEACHER'')')}">
+                <a th:href="@{/teacher/courses}">مدیریت دوره‌ها و آزمون‌ها</a>
+            </li>
 
-<a th:href="@{/logout}">خروج</a>
+            <li th:if="${#authorization.expression('hasRole(''STUDENT'')')}">
+                <a th:href="@{/student/courses}">دوره‌ها و آزمون‌های من</a>
+            </li>
+        </ul>
+    </section>
+
+    <footer>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">خروج از سیستم</button>
+        </form>
+    </footer>
+
+</div>
 
 </body>
 </html>

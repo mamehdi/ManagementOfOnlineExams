@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -22,4 +22,100 @@
 </form>
 
 </body>
+</html>-->
+<!DOCTYPE html>
+<html dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>داشبورد مدیر</title>
+
+    <style>
+        body {
+            font-family: "Vazirmatn", Tahoma, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .menu a {
+            display: block;
+            text-align: center;
+            padding: 20px;
+            background-color: #3498db;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu a:hover {
+            background-color: #2980b9;
+        }
+
+        .logout-form {
+            text-align: center;
+        }
+
+        .logout-form button {
+            padding: 12px 25px;
+            background-color: #e74c3c;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .logout-form button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>داشبورد مدیر سیستم</h1>
+
+    <div class="menu">
+        <a th:href="@{/users/list}">مدیریت کاربران</a>
+        <a th:href="@{/courses/list}">مدیریت دوره‌ها</a>
+        <a th:href="@{/users/search}">جستجوی پیشرفته کاربران</a>
+        <a th:href="@{/admin/courses}">
+            افزودن استاد و دانشجو به دوره‌ها
+        </a>
+    </div>
+
+    <form class="logout-form" th:action="@{/logout}" method="post">
+        <button type="submit">خروج از حساب کاربری</button>
+    </form>
+
+</div>
+
+</body>
 </html>
+

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html  dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -18,4 +18,79 @@
 </header>
 
 </body>
+</html>-->
+<!DOCTYPE html>
+<html dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>سیستم آزمون آنلاین</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <style>
+        body {
+            font-family: "Vazirmatn", Tahoma, sans-serif;
+            margin: 0;
+            background-color: #f5f6fa;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            margin-top: 15px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #3498db;
+            padding: 8px 16px;
+            border-radius: 6px;
+            margin: 0 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #2980b9;
+        }
+
+        main {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .welcome-text {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🎓 سیستم مدیریت آزمون آنلاین</h1>
+
+    <nav>
+        <a th:href="@{/}">🏠 صفحه اصلی</a>
+        <a th:href="@{/users/register}">📝 ثبت‌نام</a>
+        <a th:href="@{/users/login}">🔐 ورود</a>
+    </nav>
+</header>
+
+<main>
+    <p class="welcome-text">
+        به سامانه آزمون آنلاین خوش آمدید.
+        لطفاً برای استفاده از امکانات، وارد حساب کاربری خود شوید یا ثبت‌نام کنید.
+    </p>
+</main>
+
+</body>
 </html>
+

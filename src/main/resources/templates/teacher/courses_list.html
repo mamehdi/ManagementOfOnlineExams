@@ -1,24 +1,31 @@
 <!--<!DOCTYPE html>
-<html  dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org">
-
+<html dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-
+    <title>دوره‌های من</title>
 </head>
-
 <body>
 
-<table>
+<h2>دوره‌هایی که تدریس می‌کنید</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>عنوان دوره</th>
+        <th>عملیات</th>
+    </tr>
+    </thead>
+    <tbody>
     <tr th:each="course : ${courses}">
         <td th:text="${course.title}"></td>
         <td>
-            <a th:href="@{'/admin/courses/' + ${course.id} + '/manage'}">
-                افزودن استاد / دانشجو
-            </a>
+            <a th:href="@{'/teacher/courses/' + ${course.id} + '/exams'}">مشاهده آزمون‌ها</a>
         </td>
     </tr>
+    </tbody>
 </table>
-<a th:href="@{/admin/dashboard}">بازگشت</a>
+
+<a th:href="@{/dashboard}">بازگشت به داشبورد</a>
 
 </body>
 </html>-->
@@ -27,7 +34,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>مدیریت دوره‌ها</title>
+    <title>دوره‌های من</title>
 
     <style>
         body {
@@ -96,6 +103,12 @@
         .back-link:hover {
             text-decoration: underline;
         }
+
+        .empty {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+        }
     </style>
 </head>
 
@@ -103,35 +116,40 @@
 
 <div class="container">
 
-    <h2>لیست دوره‌ها</h2>
+    <h2>دوره‌هایی که تدریس می‌کنید</h2>
 
     <table>
         <thead>
         <tr>
             <th>عنوان دوره</th>
-            <th>مدیریت</th>
+            <th>عملیات</th>
         </tr>
         </thead>
 
         <tbody>
         <tr th:each="course : ${courses}">
-            <td th:text="${course.title}">عنوان دوره</td>
+            <td th:text="${course.title}">عنوان</td>
             <td>
                 <a class="action-link"
-                   th:href="@{'/admin/courses/' + ${course.id} + '/manage'}">
-                    افزودن استاد / دانشجو
+                   th:href="@{'/teacher/courses/' + ${course.id} + '/exams'}">
+                    مشاهده آزمون‌ها
                 </a>
+            </td>
+        </tr>
+
+        <tr th:if="${#lists.isEmpty(courses)}">
+            <td colspan="2" class="empty">
+                هنوز هیچ دوره‌ای به شما تخصیص داده نشده است.
             </td>
         </tr>
         </tbody>
     </table>
 
-    <a class="back-link" th:href="@{/admin/dashboard}">
-        ← بازگشت به داشبورد مدیر
+    <a class="back-link" th:href="@{/dashboard}">
+        ← بازگشت به داشبورد
     </a>
 
 </div>
 
 </body>
 </html>
-

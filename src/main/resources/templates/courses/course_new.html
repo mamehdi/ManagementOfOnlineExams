@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html  dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org" >
 
 <head>
@@ -44,4 +44,155 @@
 <a th:href="@{/admin/dashboard}">بازگشت</a>
 
 </body>
+</html>-->
+<!DOCTYPE html>
+<html dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ایجاد دوره جدید</title>
+
+    <style>
+        body {
+            font-family: "Vazirmatn", Tahoma, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #34495e;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 12px 30px;
+            background-color: #2ecc71;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>ایجاد دوره جدید</h2>
+
+    <form th:action="@{/courses}" method="post">
+
+        <div class="form-group">
+            <label for="title">عنوان دوره</label>
+            <input type="text"
+                   id="title"
+                   name="title"
+                   placeholder="مثال: جاوا مقدماتی"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label for="startDate">تاریخ شروع</label>
+            <input type="date"
+                   name="startDate"
+                   id="startDate"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label for="endDate">تاریخ پایان</label>
+            <input type="date"
+                   name="endDate"
+                   id="endDate"
+                   required>
+        </div>
+
+        <div class="actions">
+            <button type="submit">ذخیره دوره</button>
+        </div>
+
+    </form>
+
+    <a class="back-link" th:href="@{/admin/dashboard}">
+        ← بازگشت به داشبورد مدیر
+    </a>
+
+</div>
+
+<script>
+    const startDate = document.getElementById("startDate");
+    const endDate = document.getElementById("endDate");
+
+    startDate.addEventListener("change", function () {
+        if (startDate.value) {
+            endDate.min = startDate.value;
+            if (endDate.value && endDate.value < startDate.value) {
+                endDate.value = startDate.value;
+            }
+        }
+    });
+</script>
+
+</body>
 </html>
+

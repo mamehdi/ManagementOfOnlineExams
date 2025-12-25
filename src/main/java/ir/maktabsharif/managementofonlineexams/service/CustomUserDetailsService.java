@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
@@ -20,8 +19,11 @@ public class CustomUserDetailsService implements UserDetailsService {
             throws UsernameNotFoundException {
 
         Optional<User> user = userRepository.findByEmail(email);
-
-        return org.springframework.security.core.userdetails.User
+        String string = String.valueOf(user.get().getStatus());
+        if (!string.equals("APPROVED")) {
+            throw new UsernameNotFoundException("User not approved");
+        }
+        return  org.springframework.security.core.userdetails.User
                 .withUsername(user.get().getEmail())
                 .password(user.get().getPassword())
                 .roles(String.valueOf(user.get().getRole()))

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html dir="rtl" lang="fa"  xmlns:th="http://www.thymeleaf.org">
 
 
@@ -44,4 +44,123 @@
 <a th:href="@{/index.html}">بازگشت</a>
 
 </body>
+</html>-->
+<!DOCTYPE html>
+<html dir="rtl" lang="fa" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ثبت نام کاربر</title>
+
+    <style>
+        body {
+            font-family: "Vazirmatn", Tahoma, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        input, select {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #2ecc71;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>ثبت نام کاربر</h2>
+
+    <form th:action="@{/users/register}" method="post">
+
+        <label for="firstName">نام:</label>
+        <input type="text" id="firstName" name="firstName" placeholder="نام" required/>
+
+        <label for="lastName">نام خانوادگی:</label>
+        <input type="text" id="lastName" name="lastName" placeholder="نام خانوادگی" required/>
+
+        <label for="email">ایمیل:</label>
+        <input type="email" id="email" name="email" placeholder="ایمیل" required/>
+
+        <label for="password">رمز عبور:</label>
+        <input type="password" id="password" name="password" placeholder="رمز عبور" required/>
+
+        <label for="role">نقش:</label>
+        <select id="role" name="role" required>
+            <option value="STUDENT">دانشجو</option>
+            <option value="TEACHER">استاد</option>
+        </select>
+
+        <button type="submit">ثبت نام</button>
+    </form>
+
+    <a class="back-link" th:href="@{/index.html}">← بازگشت</a>
+
+</div>
+
+</body>
 </html>
+
