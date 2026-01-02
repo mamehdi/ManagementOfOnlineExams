@@ -16,6 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MultipleChoiceQuestion extends Question{
-    @OneToMany(mappedBy = "question")//,cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "question")
     private List<Option> options = new ArrayList<>();
 }

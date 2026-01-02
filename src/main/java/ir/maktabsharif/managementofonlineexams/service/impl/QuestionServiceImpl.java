@@ -28,9 +28,7 @@ public class QuestionServiceImpl implements QuestionService {
     public QuestionDto createQuestion(QuestionDto dto, Long teacherId) {
         User teacher = userRepository.findById(teacherId).orElseThrow(() ->
                 new IllegalArgumentException("Teacher not found"));
-   /*     if (dto.getCourseId() == null) {
-            throw new IllegalArgumentException("courseId cannot be null when creating question");
-        }*/
+
         Course course = courseRepository.findById(dto.getCourseId()).orElseThrow(()->
                 new IllegalArgumentException("Course not found"));;
 
