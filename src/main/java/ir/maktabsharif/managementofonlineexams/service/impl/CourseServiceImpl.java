@@ -2,8 +2,8 @@ package ir.maktabsharif.managementofonlineexams.service.impl;
 
 import ir.maktabsharif.managementofonlineexams.dto.CourseDto;
 import ir.maktabsharif.managementofonlineexams.dto.CourseResponseDto;
-import ir.maktabsharif.managementofonlineexams.enums.Role;
-import ir.maktabsharif.managementofonlineexams.enums.UserStatus;
+import ir.maktabsharif.managementofonlineexams.model.enums.Role;
+import ir.maktabsharif.managementofonlineexams.model.enums.UserStatus;
 import ir.maktabsharif.managementofonlineexams.mapper.CourseMapper;
 import ir.maktabsharif.managementofonlineexams.model.Course;
 import ir.maktabsharif.managementofonlineexams.model.User;

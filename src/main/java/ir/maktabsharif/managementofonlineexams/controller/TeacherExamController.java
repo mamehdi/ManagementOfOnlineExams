@@ -7,10 +7,12 @@ import ir.maktabsharif.managementofonlineexams.model.User;
 import ir.maktabsharif.managementofonlineexams.repository.UserRepository;
 import ir.maktabsharif.managementofonlineexams.service.CourseService;
 import ir.maktabsharif.managementofonlineexams.service.ExamService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,7 +52,16 @@ public class TeacherExamController {
     }
 
     @PostMapping("/new")
-    public String createExam(@PathVariable Long courseId, @ModelAttribute ExamDto dto, Authentication auth) {
+    public String createExam(@PathVariable Long courseId, @Valid @ModelAttribute ExamDto dto,
+                             BindingResult result,
+                             Authentication auth,
+                             Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("exam", dto);
+            model.addAttribute("courseId", courseId);
+            model.addAttribute("errors", result.getAllErrors());
+            return "teacher/exam_new";
+        }
         String username = auth.getName();
         User teacher = userRepository.findByEmail(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -71,7 +82,16 @@ public class TeacherExamController {
 
     @PostMapping("/{examId}/update")
     public String updateExam(@PathVariable Long courseId, @PathVariable Long examId,
-                             @ModelAttribute ExamDto dto, Authentication auth) {
+                             @Valid @ModelAttribute ExamDto dto,
+                             BindingResult result,
+                             Authentication auth,
+                             Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("exam", dto);
+            model.addAttribute("courseId", courseId);
+            model.addAttribute("errors", result.getAllErrors());
+            return "teacher/exam_edit";
+        }
         String username = auth.getName();
         User teacher = userRepository.findByEmail(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));

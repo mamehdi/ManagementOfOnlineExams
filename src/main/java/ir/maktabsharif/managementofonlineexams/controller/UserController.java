@@ -2,8 +2,9 @@ package ir.maktabsharif.managementofonlineexams.controller;
 
 import ir.maktabsharif.managementofonlineexams.dto.UserRegistrationDto;
 import ir.maktabsharif.managementofonlineexams.dto.UserResponseDto;
-import ir.maktabsharif.managementofonlineexams.enums.Role;
+import ir.maktabsharif.managementofonlineexams.model.enums.Role;
 import ir.maktabsharif.managementofonlineexams.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -25,7 +27,13 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String register(UserRegistrationDto dto) {
+    public String register(@Valid UserRegistrationDto dto,
+                           BindingResult result,
+                           Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("errors", result.getAllErrors());
+            return "users/register";
+        }
         userService.register(dto);
         return "redirect:/";
     }

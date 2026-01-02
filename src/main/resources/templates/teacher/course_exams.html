@@ -1,73 +1,3 @@
-<!--<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <title>آزمون‌های دوره</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-    <style>
-        body { font-family: Tahoma, sans-serif; margin: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        th { background-color: #f0f0f0; }
-        a.button { text-decoration: none; padding: 5px 10px; background-color: #007bff; color: white; border-radius: 4px; }
-        a.button:hover { background-color: #0056b3; }
-        .danger { background-color: #dc3545; }
-        .danger:hover { background-color: #a71d2a; }
-    </style>
-    <script>
-        function confirmDelete(examTitle) {
-            return confirm('آیا مطمئن هستید می‌خواهید آزمون "' + examTitle + '" را حذف کنید؟');
-        }
-    </script>
-</head>
-<body>
-<h1>آزمون‌های دوره: <span th:text="${course.title}"></span></h1>
-
-<a th:href="@{/teacher/courses/{courseId}/exams/new(courseId=${course.id})}" class="button">ایجاد آزمون جدید</a>
-<p th:text="'تعداد آزمون‌ها: ' + ${exams.size()}"></p>
-
-<table>
-    <thead>
-    <tr>
-        <th>عنوان آزمون</th>
-        <th>توضیحات</th>
-        <th>مدت آزمون (دقیقه)</th>
-        <th>عملیات</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="exam : ${exams}">
-        <td th:text="${exam.title}"></td>
-        <td th:text="${exam.description}"></td>
-        <td th:text="${exam.duration}"></td>
-        <td>
-            <span th:if="${exam.teacher.id == currentUser.id}">
-            <a th:href="@{/teacher/courses/{courseId}/exams/{examId}/edit(
-        courseId=${course.id},
-        examId=${exam.id}
-)}" class="button">ویرایش</a>
-
-            <form th:action="@{/teacher/courses/{courseId}/exams/{examId}/delete(
-        courseId=${course.id},
-        examId=${exam.id}
-)}" method="post" style="display:inline">
-                <button type="submit" class="button danger">
-                    حذف
-                </button>
-            </form>
-
-            </span>
-        </td>
-    </tr>
-    <tr th:if="${#lists.isEmpty(exams)}">
-        <td colspan="4">هیچ آزمونی وجود ندارد.</td>
-    </tr>
-    </tbody>
-</table>
-
-<a th:href="@{/teacher/courses}" class="button">بازگشت به دوره‌ها</a>
-</body>
-</html>-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="fa" dir="rtl">
 <head>
@@ -168,6 +98,71 @@
             margin-top: 25px;
             text-align: left;
         }
+
+        .fancy-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            font-size: 17px;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: 0px 6px 15px rgba(37, 117, 252, 0.4);
+        }
+
+        .fancy-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0px 8px 20px rgba(37, 117, 252, 0.55);
+            background: linear-gradient(135deg, #5b0eb8, #1f63d1);
+        }
+
+        .fancy-btn:active {
+            transform: scale(0.98);
+            box-shadow: 0px 4px 12px rgba(37, 117, 252, 0.35);
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            font-size: 13px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            background-color: #3498db;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .action-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .action-btn.danger {
+            background-color: #e74c3c;
+        }
+
+        .action-btn.danger:hover {
+            background-color: #c0392b;
+        }
+
+        .action-btn.secondary {
+            background-color: #8e44ad;
+        }
+
+        .action-btn.secondary:hover {
+            background-color: #732d91;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
     </style>
 
     <script>
@@ -214,29 +209,46 @@
             <td th:text="${exam.duration}">---</td>
 
             <td class="actions">
-                <span th:if="${exam.teacher.id == currentUser.id}">
+    <span th:if="${exam.teacher.id == currentUser.id}">
 
-                    <a th:href="@{/teacher/courses/{courseId}/exams/{examId}/edit(
-                        courseId=${course.id},
-                        examId=${exam.id}
-                    )}" class="button">
-                        ویرایش
-                    </a>
+        <a th:href="@{/teacher/courses/{courseId}/exams/{examId}/edit(
+            courseId=${course.id},
+            examId=${exam.id}
+        )}"
+           class="action-btn">
+            ویرایش
+        </a>
 
-                    <form th:action="@{/teacher/courses/{courseId}/exams/{examId}/delete(
-                        courseId=${course.id},
-                        examId=${exam.id}
-                    )}"
-                          method="post"
-                          onsubmit="return confirmDelete([[${exam.title}]])">
+        <form th:action="@{/teacher/courses/{courseId}/exams/{examId}/delete(
+            courseId=${course.id},
+            examId=${exam.id}
+        )}"
+              method="post"
+              onsubmit="return confirmDelete([[${exam.title}]])">
 
-                        <button type="submit" class="button danger">
-                            حذف
-                        </button>
-                    </form>
+            <button type="submit" class="action-btn danger">
+                حذف
+            </button>
+        </form>
 
-                </span>
+        <a th:href="@{/teacher/courses/{courseId}/exams/{examId}/questions(
+            courseId=${course.id},
+            examId=${exam.id}
+        )}"
+           class="action-btn secondary">
+            مدیریت سوالات
+        </a>
+
+        <button type="button"
+                class="action-btn secondary"
+                th:attr="data-exam-id=${exam.id}"
+                onclick="showQuestions(this)">
+            نمایش سوالات
+        </button>
+
+    </span>
             </td>
+
         </tr>
 
         <tr th:if="${#lists.isEmpty(exams)}">
@@ -254,6 +266,89 @@
     </div>
 
 </div>
+<hr>
+
+<h3 style="margin-top:30px; text-align:center">
+    سوالات آزمون
+</h3>
+
+<table id="questions-table" style="display:none">
+    <thead>
+    <tr>
+        <th>عنوان سوال</th>
+        <th>نمره پیش‌فرض</th>
+    </tr>
+    </thead>
+
+    <tbody id="questions-body"></tbody>
+
+    <tfoot>
+    <tr>
+        <td>جمع کل نمرات</td>
+        <td id="total-score">0</td>
+    </tr>
+    </tfoot>
+</table>
+
+<script>
+    function showQuestions(button) {
+        const examId = button.dataset.examId;
+
+        fetch(`/teacher/exams/${examId}/questions-scores`)
+            .then(res => res.json())
+            .then(questions => {
+                const table = document.getElementById("questions-table");
+                const tbody = document.getElementById("questions-body");
+
+                tbody.innerHTML = "";
+                table.style.display = "table";
+
+                let total = 0;
+
+                questions.forEach(q => {
+                    total += q.defaultScore || 0;
+
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${q.questionTitle}</td>
+                        <td>
+                            <input type="number"
+                                   min="0"
+                                   value="${q.defaultScore ?? 0}"
+                                   data-id="${q.questionId}"
+                                   class="score-input">
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                document.getElementById("total-score").innerText = total;
+                attachScoreEvents();
+            });
+    }
+
+    function attachScoreEvents() {
+        document.querySelectorAll(".score-input").forEach(input => {
+            input.addEventListener("change", function () {
+                const questionId = this.dataset.id;
+                const score = this.value;
+
+                fetch(`/teacher/exams/questions/${questionId}/score?score=${score}`, {
+                    method: "POST"
+                }).then(updateTotal);
+            });
+        });
+    }
+
+    function updateTotal() {
+        let total = 0;
+        document.querySelectorAll(".score-input").forEach(i => {
+            total += Number(i.value) || 0;
+        });
+        document.getElementById("total-score").innerText = total;
+    }
+</script>
+
 
 </body>
 </html>

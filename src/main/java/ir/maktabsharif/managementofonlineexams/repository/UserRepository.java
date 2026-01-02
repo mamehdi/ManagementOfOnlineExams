@@ -1,6 +1,6 @@
 package ir.maktabsharif.managementofonlineexams.repository;
 
-import ir.maktabsharif.managementofonlineexams.enums.Role;
+import ir.maktabsharif.managementofonlineexams.model.enums.Role;
 import ir.maktabsharif.managementofonlineexams.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

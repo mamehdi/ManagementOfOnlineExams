@@ -2,8 +2,8 @@ package ir.maktabsharif.managementofonlineexams.service.impl;
 
 import ir.maktabsharif.managementofonlineexams.dto.UserRegistrationDto;
 import ir.maktabsharif.managementofonlineexams.dto.UserResponseDto;
-import ir.maktabsharif.managementofonlineexams.enums.Role;
-import ir.maktabsharif.managementofonlineexams.enums.UserStatus;
+import ir.maktabsharif.managementofonlineexams.model.enums.Role;
+import ir.maktabsharif.managementofonlineexams.model.enums.UserStatus;
 import ir.maktabsharif.managementofonlineexams.mapper.UserMapper;
 import ir.maktabsharif.managementofonlineexams.model.User;
 import ir.maktabsharif.managementofonlineexams.repository.UserRepository;

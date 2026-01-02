@@ -1,7 +1,7 @@
 package ir.maktabsharif.managementofonlineexams.dto;
 
-import ir.maktabsharif.managementofonlineexams.enums.Role;
-import ir.maktabsharif.managementofonlineexams.enums.UserStatus;
+import ir.maktabsharif.managementofonlineexams.model.enums.Role;
+import ir.maktabsharif.managementofonlineexams.model.enums.UserStatus;
 import lombok.Data;
 
 @Data

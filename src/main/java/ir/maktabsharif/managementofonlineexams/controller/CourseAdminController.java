@@ -1,6 +1,6 @@
 package ir.maktabsharif.managementofonlineexams.controller;
 
-import ir.maktabsharif.managementofonlineexams.enums.Role;
+import ir.maktabsharif.managementofonlineexams.model.enums.Role;
 import ir.maktabsharif.managementofonlineexams.repository.CourseRepository;
 import ir.maktabsharif.managementofonlineexams.repository.UserRepository;
 import ir.maktabsharif.managementofonlineexams.service.CourseService;

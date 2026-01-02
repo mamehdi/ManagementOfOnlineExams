@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>مدیریت سوالات آزمون</title>
+
+    <style>
+        body {
+            font-family: "Vazirmatn", Tahoma, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 30px;
+            text-align: right;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .section {
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+
+        .section h3 {
+            margin-top: 0;
+            color: #34495e;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 12px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        select, input[type="text"], input[type="number"], textarea {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 18px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .option-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .option-row input[type="text"] {
+            flex: 1;
+        }
+
+        .footer-back {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>مدیریت سوالات آزمون</h2>
+
+    <!-- بخش افزودن سوال از بانک سوالات -->
+    <div class="section">
+        <h3>افزودن سوال از بانک سوالات</h3>
+
+        <form th:action="@{/teacher/courses/{courseId}/exams/{examId}/questions/addExisting(
+            courseId=${courseId}, examId=${examId})}" method="post">
+
+            <label>انتخاب سوال:</label>
+            <select name="questionId" required>
+                <option value="">-- انتخاب سوال --</option>
+                <option th:each="q : ${bankQuestions}"
+                        th:value="${q.id}"
+                        th:text="${q.title}">
+                </option>
+            </select>
+
+            <label>نمره پیشفرض برای این سوال:</label>
+            <input type="number" name="defaultScore" placeholder="مثال: 5" required/>
+
+            <button type="submit">افزودن به آزمون</button>
+        </form>
+    </div>
+
+    <!-- بخش افزودن سوال جدید -->
+    <div class="section">
+        <h3>ایجاد سوال جدید</h3>
+
+        <form th:action="@{|/teacher/courses/${courseId}/exams/${examId}/questions/addNew|}"
+              th:object="${newQuestion}"
+              method="post">
+            <input type="hidden" name="courseId" th:value="${courseId}" />
+            <input type="hidden" name="examId" th:value="${examId}" />
+            <input type="hidden" name="questionType" th:value="MCQ" />
+
+
+            <label>عنوان سوال:</label>
+            <input th:field="*{title}" placeholder="عنوان واضح و کوتاه" required />
+
+            <label>صورت سوال:</label>
+            <textarea th:field="*{text}" placeholder="متن سوال را وارد کنید"></textarea>
+
+            <label>گزینه‌ها (برای سوال چندگزینه‌ای)</label>
+            <div id="optionsContainer">
+                <div th:each="opt, stat : *{options}" class="option-row">
+                    <input type="text" th:field="*{options[__${stat.index}__].text}" placeholder="متن گزینه" required/>
+                    <label>
+                        صحیح؟
+                        <input type="checkbox" th:field="*{options[__${stat.index}__].correct}"/>
+                    </label>
+                </div>
+            </div>
+
+            <button type="button" onclick="addOption()">افزودن گزینه جدید</button>
+
+            <label>نمره پیشفرض برای این سوال:</label>
+            <input type="number" name="defaultScore"
+                   placeholder="مثال: 5" required />
+
+            <button type="submit">ثبت سوال جدید</button>
+        </form>
+
+    </div>
+
+    <a class="back-link" th:href="@{|/teacher/courses/${courseId}/exams|}">
+        ← بازگشت به لیست آزمون‌ها
+    </a>
+</div>
+
+<script>
+    let optionIndex = 0;
+    function addOption() {
+        const container = document.getElementById("optionsContainer");
+        const idx = optionIndex++;
+        const html = `
+            <div class="option-row">
+                <input type="text"
+                       name="options[${idx}].text"
+                       placeholder="متن گزینه"
+                       required/>
+                <label style="margin-right:8px;">
+                    صحیح؟
+                    <input type="checkbox"
+                           name="options[${idx}].correct"/>
+                </label>
+            </div>
+        `;
+        container.insertAdjacentHTML("beforeend", html);
+    }
+</script>
+
+</body>
+</html>

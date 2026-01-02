@@ -7,32 +7,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Entity
-@Getter
+@Table(name = "questions")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "question_type")
 @Setter
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
-public class Exam extends BaseModel<Long> {
+@NoArgsConstructor
+public abstract class Question extends BaseModel <Long>{
+    @Column(nullable = false)
     private String title;
 
-    @Column(length = 1000)
-    private String description;
+    @Column(length = 2000)
+    private String text;
 
-    private Integer duration;
-
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    private Course course;
+    private String imagePath;
 
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     private User teacher;
 
-    @OneToMany(mappedBy = "exam")
-    private Set<StudentExam> studentExams = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
 }
-

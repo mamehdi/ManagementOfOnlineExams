@@ -1,6 +1,6 @@
 package ir.maktabsharif.managementofonlineexams.config;
 
-import ir.maktabsharif.managementofonlineexams.enums.UserStatus;
+import ir.maktabsharif.managementofonlineexams.model.enums.UserStatus;
 import ir.maktabsharif.managementofonlineexams.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,7 +22,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(user.getRole().name()));
+        return List.of(new SimpleGrantedAuthority("ROLE_"+user.getRole().name()));
     }
 
     @Override

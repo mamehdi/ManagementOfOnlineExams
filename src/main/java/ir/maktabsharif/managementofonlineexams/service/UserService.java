@@ -2,7 +2,7 @@ package ir.maktabsharif.managementofonlineexams.service;
 
 import ir.maktabsharif.managementofonlineexams.dto.UserRegistrationDto;
 import ir.maktabsharif.managementofonlineexams.dto.UserResponseDto;
-import ir.maktabsharif.managementofonlineexams.enums.Role;
+import ir.maktabsharif.managementofonlineexams.model.enums.Role;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
